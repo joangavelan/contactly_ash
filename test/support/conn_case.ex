@@ -28,6 +28,7 @@ defmodule ContactlyWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import ContactlyWeb.ConnCase
+      import Inertia.Testing
     end
   end
 

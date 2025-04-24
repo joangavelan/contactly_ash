@@ -26,6 +26,7 @@ config :contactly, ContactlyWeb.Endpoint,
   secret_key_base: "OkTnIAUw1SkTYbTBRmqspEWT+3IMVtabkBMs7LIob6pizo1oZjfOTqBc1uj6CuKc",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:contactly, ~w(--sourcemap=inline --watch)]},
+    ssr: {Esbuild, :install_and_run, [:ssr, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:contactly, ~w(--watch)]}
   ]
 

@@ -16,6 +16,11 @@ defmodule Contactly.Application do
       {Finch, name: Contactly.Finch},
       # Start a worker by calling: Contactly.Worker.start_link(arg)
       # {Contactly.Worker, arg},
+
+      # Start the SSR process pool
+      # You must specify a `path` option to locate the directory where the `ssr.js` file lives.
+      {Inertia.SSR, path: Path.join([Application.app_dir(:contactly), "priv"])},
+
       # Start to serve requests, typically the last entry
       ContactlyWeb.Endpoint,
       {AshAuthentication.Supervisor, [otp_app: :contactly]}

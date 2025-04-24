@@ -67,7 +67,8 @@ defmodule Contactly.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:inertia, "~> 2.3.0"}
     ]
   end
 
@@ -84,10 +85,11 @@ defmodule Contactly.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ash.setup --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind contactly", "esbuild contactly"],
+      "assets.build": ["tailwind contactly", "esbuild contactly", "esbuild ssr"],
       "assets.deploy": [
         "tailwind contactly --minify",
         "esbuild contactly --minify",
+        "esbuild ssr",
         "phx.digest"
       ],
       "phx.routes": ["phx.routes", "ash_authentication.phoenix.routes"]

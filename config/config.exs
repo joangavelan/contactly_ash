@@ -72,13 +72,27 @@ config :contactly, Contactly.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.17.11",
+  version: "0.21.5",
   contactly: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ],
+  ssr: [
+    args: ~w(js/ssr.tsx --bundle --platform=node --outdir=../priv --format=cjs),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
+
+config :inertia,
+  endpoint: ContactlyWeb.Endpoint,
+  static_paths: ["/assets/app.js"],
+  default_version: "1",
+  camelize_props: true,
+  history: [encrypt: false],
+  ssr: true,
+  raise_on_ssr_failure: config_env() != :prod
 
 # Configure tailwind (the version is required)
 config :tailwind,
