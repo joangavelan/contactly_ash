@@ -90,8 +90,6 @@ defmodule ContactlyWeb do
 
       # HTML escaping functionality
       import Phoenix.HTML
-      # Core UI components
-      import ContactlyWeb.CoreComponents
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
