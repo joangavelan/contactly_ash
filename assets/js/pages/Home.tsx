@@ -9,7 +9,8 @@ export default function Home({ text }: Props) {
     <>
       <Head title="Home" />
 
-      <p>{text}</p>
+      <p className="text-lg text-green-500">{text}</p>
+      <button className="btn btn-primary">Button</button>
     </>
   )
 }

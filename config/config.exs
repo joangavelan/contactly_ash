@@ -96,10 +96,9 @@ config :inertia,
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "3.4.3",
+  version: "4.0.0",
   contactly: [
     args: ~w(
-      --config=tailwind.config.js
       --input=css/app.css
       --output=../priv/static/assets/app.css
     ),
