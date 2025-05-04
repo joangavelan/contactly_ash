@@ -1,4 +1,4 @@
-defmodule Contactly.Repo.Migrations.InitializeAndAddAuthenticationResourcesAndAddPasswordAuthenticationAndAddPasswordAuthExtensions1 do
+defmodule Contactly.Repo.Migrations.InitializeExtensions do
   @moduledoc """
   Installs any extensions that are mentioned in the repo's `installed_extensions/0` callback
 
