@@ -1,4 +1,4 @@
-defmodule Contactly.Repo.Migrations.InitializeAndAddAuthenticationResourcesAndAddPasswordAuthenticationAndAddPasswordAuth do
+defmodule Contactly.Repo.Migrations.CreateAuthTables do
   @moduledoc """
   Updates resources based on their most recent snapshots.
 
@@ -10,9 +10,19 @@ defmodule Contactly.Repo.Migrations.InitializeAndAddAuthenticationResourcesAndAd
   def up do
     create table(:users, primary_key: false) do
       add :id, :uuid, null: false, default: fragment("gen_random_uuid()"), primary_key: true
+      add :first_name, :text, null: false
+      add :last_name, :text, null: false
       add :email, :citext, null: false
       add :hashed_password, :text, null: false
       add :confirmed_at, :utc_datetime_usec
+
+      add :created_at, :utc_datetime_usec,
+        null: false,
+        default: fragment("(now() AT TIME ZONE 'utc')")
+
+      add :updated_at, :utc_datetime_usec,
+        null: false,
+        default: fragment("(now() AT TIME ZONE 'utc')")
     end
 
     create unique_index(:users, [:email], name: "users_unique_email_index")

@@ -89,7 +89,7 @@ config :inertia,
   endpoint: ContactlyWeb.Endpoint,
   static_paths: ["/assets/app.js"],
   default_version: "1",
-  camelize_props: true,
+  camelize_props: false,
   history: [encrypt: false],
   ssr: true,
   raise_on_ssr_failure: config_env() != :prod

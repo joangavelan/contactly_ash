@@ -2,19 +2,17 @@ defmodule Contactly.Accounts.User.Senders.SendPasswordResetEmail do
   @moduledoc """
   Sends a password reset email
   """
-
-  use AshAuthentication.Sender
   use ContactlyWeb, :verified_routes
+  use AshAuthentication.Sender
 
   import Swoosh.Email
 
   alias Contactly.Mailer
 
   @impl true
-  def send(user, token, _) do
+  def send(user, token, _opts) do
     new()
-    # TODO: Replace with your email
-    |> from({"noreply", "noreply@example.com"})
+    |> from({"contactly", "support@contactly.test"})
     |> to(to_string(user.email))
     |> subject("Reset your password")
     |> html_body(body(token: token))
