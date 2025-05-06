@@ -1,5 +1,5 @@
 import type { PageProps } from "@inertiajs/core"
-import { usePage } from "@inertiajs/react"
+import { router, usePage } from "@inertiajs/react"
 import * as React from "react"
 
 const flashKeyClass = {
@@ -28,6 +28,9 @@ export const Flash = () => {
 
   const closeFlash = () => {
     setVisible(false)
+    // Workaround to prevent the flash message from being displayed again after closing it
+    // https://github.com/inertiajs/inertia/issues/64
+    router.reload({ only: ["flash"] })
   }
 
   if (!flashKey || !visible) {
