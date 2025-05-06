@@ -22,7 +22,7 @@ export default function Register() {
       <h1 className="mb-1.5">Register</h1>
 
       <form onSubmit={handleSubmit} id="register-form" className="form">
-        <fieldset className="form-group">
+        <fieldset className="form-field">
           <label htmlFor="first_name" className="label">
             First Name
           </label>
@@ -37,7 +37,7 @@ export default function Register() {
           <ErrorField error={errors.first_name} />
         </fieldset>
 
-        <fieldset className="form-group">
+        <fieldset className="form-field">
           <label htmlFor="last_name" className="label">
             Last Name
           </label>
@@ -52,7 +52,7 @@ export default function Register() {
           <ErrorField error={errors.last_name} />
         </fieldset>
 
-        <fieldset className="form-group">
+        <fieldset className="form-field">
           <label htmlFor="email" className="label">
             Email
           </label>
@@ -67,7 +67,7 @@ export default function Register() {
           <ErrorField error={errors.email} />
         </fieldset>
 
-        <fieldset className="form-group">
+        <fieldset className="form-field">
           <label htmlFor="password" className="label">
             Password
           </label>
@@ -82,7 +82,7 @@ export default function Register() {
           <ErrorField error={errors.password} />
         </fieldset>
 
-        <fieldset className="form-group">
+        <fieldset className="form-field">
           <label htmlFor="password_confirmation" className="label">
             Confirm password
           </label>

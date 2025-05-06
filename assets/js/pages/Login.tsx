@@ -18,7 +18,7 @@ export default function Login() {
       <h1 className="mb-1.5">Login</h1>
 
       <form onSubmit={handleSubmit} className="form">
-        <fieldset className="form-group">
+        <fieldset className="form-field">
           <label htmlFor="email" className="label">
             Email
           </label>
@@ -32,7 +32,7 @@ export default function Login() {
           />
         </fieldset>
 
-        <fieldset className="form-group">
+        <fieldset className="form-field">
           <div className="flex items-center justify-between">
             <label htmlFor="password" className="label">
               Password

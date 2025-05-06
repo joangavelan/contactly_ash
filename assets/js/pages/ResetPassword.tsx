@@ -23,7 +23,7 @@ export default function ResetPassword({ reset_token }: Props) {
       <h1>Reset Password</h1>
 
       <form onSubmit={handleSubmit} className="form">
-        <fieldset>
+        <fieldset className="form-field">
           <label htmlFor="password" className="label">
             New Password
           </label>
@@ -38,7 +38,7 @@ export default function ResetPassword({ reset_token }: Props) {
           <ErrorField error={errors.password} />
         </fieldset>
 
-        <fieldset>
+        <fieldset className="form-field">
           <label htmlFor="password_confirmation" className="label">
             Confirm New Password
           </label>

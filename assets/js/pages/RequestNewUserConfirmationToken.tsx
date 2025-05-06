@@ -19,7 +19,7 @@ export default function RequestNewUserConfirmationToken() {
       </div>
 
       <form onSubmit={handleSubmit} className="form">
-        <fieldset className="form-group">
+        <fieldset className="form-field">
           <label htmlFor="email" className="label">
             Email
           </label>
