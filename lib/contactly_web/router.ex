@@ -41,7 +41,7 @@ defmodule ContactlyWeb.Router do
   scope "/", ContactlyWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    get "/contacts", ContactsController, :index
+    resources "/contacts", ContactsController
 
     get "/settings", UserSettingsController, :edit
     put "/settings", UserSettingsController, :update
