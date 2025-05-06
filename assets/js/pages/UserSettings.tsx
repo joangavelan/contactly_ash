@@ -25,7 +25,7 @@ export default function UserSettings() {
         <h2>Update password</h2>
 
         <form onSubmit={handleSubmit} className="form">
-          <fieldset className="form-group">
+          <fieldset className="form-field">
             <label htmlFor="current_password" className="label">
               Current Password
             </label>
@@ -40,7 +40,7 @@ export default function UserSettings() {
             <ErrorField error={errors.current_password} />
           </fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className="form-field">
             <label htmlFor="password" className="label">
               New Password
             </label>
@@ -55,7 +55,7 @@ export default function UserSettings() {
             <ErrorField error={errors.password} />
           </fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className="form-field">
             <label htmlFor="password_confirmation" className="label">
               Confirm New Password
             </label>
