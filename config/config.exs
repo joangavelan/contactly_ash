@@ -48,7 +48,7 @@ config :spark,
 config :contactly,
   ecto_repos: [Contactly.Repo],
   generators: [timestamp_type: :utc_datetime],
-  ash_domains: [Contactly.Accounts]
+  ash_domains: [Contactly.Accounts, Contactly.Contacts]
 
 # Configures the endpoint
 config :contactly, ContactlyWeb.Endpoint,
