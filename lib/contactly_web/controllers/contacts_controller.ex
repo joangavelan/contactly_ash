@@ -86,4 +86,36 @@ defmodule ContactlyWeb.ContactsController do
         |> redirect(to: ~p"/contacts")
     end
   end
+
+  def import_csv(conn, %{"file" => %Plug.Upload{path: path, content_type: "text/csv"}}) do
+    current_user = conn.assigns.current_user
+
+    case Contacts.upload_csv_contacts(%{file_path: path}, actor: current_user) do
+      {:ok, _result} ->
+        conn
+        |> put_flash(:success, "Contacts imported successfully!")
+        |> redirect(to: ~p"/contacts")
+
+      {:error, _error} ->
+        conn
+        |> put_flash(:error, "An error occurred while trying to upload the contacts.")
+        |> redirect(to: ~p"/contacts")
+    end
+  end
+
+  def export_csv(conn, _params) do
+    current_user = conn.assigns.current_user
+
+    with {:ok, csv} <- Contacts.generate_csv_contacts(actor: current_user) do
+      conn
+      |> put_resp_content_type("text/csv")
+      |> put_resp_header("content-disposition", "attachment; filename=contacts.csv")
+      |> send_resp(200, csv)
+    else
+      _ ->
+        conn
+        |> put_flash(:error, "An error occurred while trying to export contacts.")
+        |> redirect(to: ~p"/contacts")
+    end
+  end
 end

@@ -1,4 +1,6 @@
 import { DeleteContactButton } from "@/components/DeleteContactButton"
+import { DownloadContacts } from "@/components/DownloadContacts"
+import { UploadContacts } from "@/components/UploadContacts"
 import { useUser } from "@/hooks/useUser"
 import { Layout } from "@/layouts/Layout"
 import type { Contact } from "@/types/contact"
@@ -35,6 +37,12 @@ export default function Contacts({ contacts }: Props) {
       <div className="divider"></div>
 
       <div className="flex w-[30rem] flex-col gap-8">
+        <UploadContacts />
+
+        <DownloadContacts />
+
+        <div className="divider"></div>
+
         <div className="flex items-center justify-between gap-2.5">
           <h2>Contacts</h2>
 

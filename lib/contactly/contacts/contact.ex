@@ -18,6 +18,40 @@ defmodule Contactly.Contacts.Contact do
     default_accept [:name, :email, :phone]
     defaults [:read, :destroy, update: :*]
 
+    action :upload_csv_contacts, :struct do
+      argument :file_path, :string, allow_nil?: false
+
+      run fn input, context ->
+        result =
+          input.arguments.file_path
+          |> File.stream!()
+          |> CSV.decode!(headers: true)
+          |> Ash.bulk_create(__MODULE__, :create_contact, actor: context.actor)
+
+        if result.status == :success do
+          {:ok, result}
+        else
+          {:error, result.errors}
+        end
+      end
+    end
+
+    action :generate_csv_contacts, :string do
+      run fn input, context ->
+        contacts = Ash.read!(__MODULE__, actor: context.actor)
+
+        headers = ["name", "email", "phone"]
+        rows = Enum.map(contacts, &[&1.name, &1.email, &1.phone])
+
+        csv =
+          [headers | rows]
+          |> CSV.encode()
+          |> Enum.join()
+
+        {:ok, csv}
+      end
+    end
+
     create :create_contact do
       change set_attribute(:user_id, actor(:id))
     end
@@ -34,6 +68,10 @@ defmodule Contactly.Contacts.Contact do
 
     policy action_type([:read, :destroy, :update]) do
       authorize_if relates_to_actor_via(:user)
+    end
+
+    policy action([:upload_csv_contacts, :generate_csv_contacts]) do
+      authorize_if actor_present()
     end
   end
 

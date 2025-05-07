@@ -61,7 +61,8 @@ defmodule Contactly.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:inertia, "~> 2.3.0"}
+      {:inertia, "~> 2.3.0"},
+      {:csv, "~> 3.2"}
     ]
   end
 
