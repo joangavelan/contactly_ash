@@ -41,6 +41,9 @@ defmodule ContactlyWeb.Router do
   scope "/", ContactlyWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    post "/contacts/import", ContactsController, :import_csv
+    get "/contacts/export", ContactsController, :export_csv
+
     resources "/contacts", ContactsController
 
     get "/settings", UserSettingsController, :edit
