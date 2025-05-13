@@ -1,5 +1,7 @@
 import { DeleteContactButton } from "@/components/DeleteContactButton"
 import { DownloadContacts } from "@/components/DownloadContacts"
+import { Pagination } from "@/components/Pagination"
+import { SearchBar } from "@/components/SearchBar"
 import { UploadContacts } from "@/components/UploadContacts"
 import { useUser } from "@/hooks/useUser"
 import { Layout } from "@/layouts/Layout"
@@ -7,10 +9,14 @@ import type { Contact } from "@/types/contact"
 import { Link } from "@inertiajs/react"
 
 interface Props {
-  contacts: Contact[]
+  contacts: {
+    data: Contact[]
+    pagination: Array<number | string>
+  }
+  params: Record<string, string>
 }
 
-export default function Contacts({ contacts }: Props) {
+export default function Contacts({ contacts, params }: Props) {
   const { user } = useUser()
 
   return (
@@ -51,30 +57,60 @@ export default function Contacts({ contacts }: Props) {
           </Link>
         </div>
 
-        {contacts.length === 0 ? (
+        <SearchBar initialSearch={params?.search} />
+
+        {contacts.data.length === 0 ? (
           <p>No contacts found.</p>
         ) : (
-          <ul className="flex list-disc flex-col gap-4 pl-4">
-            {contacts.map(({ id, name }) => (
-              <li key={id} className="list-item">
-                <div className="relative flex items-center justify-between gap-10">
-                  <p className="truncate">{name}</p>
+          <div className="flex flex-col gap-4 divide-y">
+            <div className="flex items-center gap-2.5 pb-2.5">
+              <h3 className="font-semibold">Name</h3>
+              <div className="flex gap-1.5">
+                <Link
+                  href="/contacts"
+                  as="button"
+                  data={{ ...params, sort: params?.sort === "+name" ? undefined : "+name" }}
+                  className={`btn btn-sm ${params?.sort === "+name" ? "btn-active" : ""}`}
+                  preserveScroll
+                >
+                  Asc
+                </Link>
+                <Link
+                  href="/contacts"
+                  as="button"
+                  data={{ ...params, sort: params?.sort === "-name" ? undefined : "-name" }}
+                  className={`btn btn-sm ${params?.sort === "-name" ? "btn-active" : ""}`}
+                  preserveScroll
+                >
+                  Desc
+                </Link>
+              </div>
+            </div>
 
-                  <div className="flex gap-2.5">
-                    <Link href={`/contacts/${id}`} as="button" className="btn">
-                      View
-                    </Link>
+            <ul className="flex list-disc flex-col gap-4 pb-2.5 pl-4">
+              {contacts.data.map(({ id, name }) => (
+                <li key={id} className="list-item">
+                  <div className="relative flex items-center justify-between gap-10">
+                    <p className="truncate">{name}</p>
 
-                    <Link href={`/contacts/${id}/edit`} as="button" className="btn">
-                      Edit
-                    </Link>
+                    <div className="flex gap-2.5">
+                      <Link href={`/contacts/${id}`} as="button" className="btn">
+                        View
+                      </Link>
 
-                    <DeleteContactButton contactId={id} />
+                      <Link href={`/contacts/${id}/edit`} as="button" className="btn">
+                        Edit
+                      </Link>
+
+                      <DeleteContactButton contactId={id} />
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+
+            <Pagination items={contacts.pagination} params={params} />
+          </div>
         )}
       </div>
     </Layout>

@@ -4,7 +4,7 @@ defmodule Contactly.Contacts do
 
   resources do
     resource Contactly.Contacts.Contact do
-      define :list_contacts, action: :read
+      define :list_contacts
       define :create_contact
       define :get_contact, args: [:id]
       define :update_contact, action: :update

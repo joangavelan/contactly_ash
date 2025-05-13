@@ -18,6 +18,15 @@ defmodule Contactly.Contacts.Contact do
     default_accept [:name, :email, :phone]
     defaults [:read, :destroy, update: :*]
 
+    action :list_contacts, :map do
+      argument :search, :string
+      argument :sort, :string
+      argument :page, :string, default: "1"
+
+      run {Contactly.Actions.GenericListing,
+           resource: __MODULE__, search_by: [:name], serializer: :serialize_contacts}
+    end
+
     action :upload_csv_contacts, :struct do
       argument :file_path, :string, allow_nil?: false
 
@@ -71,6 +80,10 @@ defmodule Contactly.Contacts.Contact do
     end
 
     policy action([:upload_csv_contacts, :generate_csv_contacts]) do
+      authorize_if actor_present()
+    end
+
+    policy action(:list_contacts) do
       authorize_if actor_present()
     end
   end

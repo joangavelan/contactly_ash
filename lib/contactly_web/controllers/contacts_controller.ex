@@ -5,13 +5,13 @@ defmodule ContactlyWeb.ContactsController do
 
   alias Contactly.Contacts
 
-  def index(conn, _params) do
+  def index(conn, params) do
     current_user = conn.assigns.current_user
-
-    contacts = Contacts.list_contacts!(actor: current_user)
+    contacts = Contacts.list_contacts!(params, actor: current_user)
 
     conn
-    |> assign_prop(:contacts, serialize_contacts(contacts))
+    |> assign_prop(:contacts, contacts)
+    |> assign_prop(:params, params)
     |> render_inertia("Contacts/Index")
   end
 
