@@ -1,3 +1,4 @@
+import { Back } from "@/components/Back"
 import { DeleteContactButton } from "@/components/DeleteContactButton"
 import { Layout } from "@/layouts/Layout"
 import type { Contact } from "@/types/contact"
@@ -12,9 +13,7 @@ export default function Show({ contact }: Props) {
 
   return (
     <Layout title="Contact">
-      <Link href="/contacts" className="link">
-        Back to contacts
-      </Link>
+      <Back />
 
       <h1>Contact details</h1>
 

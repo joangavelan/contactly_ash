@@ -1,3 +1,4 @@
+import { Back } from "@/components/Back"
 import { ErrorField } from "@/components/ErrorField"
 import { Layout } from "@/layouts/Layout"
 import { useForm } from "@inertiajs/react"
@@ -17,6 +18,8 @@ export default function UserSettings() {
 
   return (
     <Layout title="Settings">
+      <Back />
+
       <h1>User Settings</h1>
 
       <div className="divider"></div>
